@@ -7,5 +7,6 @@ namespace VehicleVilla.Services
         bool VerifyAccount(string user, string pass);
         int CreateAccount(UserModel user);
         UserModel GetUserByUsername(string username);
+        int UpdateAccount(UserModel user);
     }
 }

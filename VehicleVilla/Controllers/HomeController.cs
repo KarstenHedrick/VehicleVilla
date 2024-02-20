@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using VehicleVilla.Models;
@@ -8,13 +9,22 @@ namespace VehicleVilla.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IHttpContextAccessor context;
+
+        public HomeController(ILogger<HomeController> logger, IHttpContextAccessor httpContextAccessor)
         {
             _logger = logger;
+            context = httpContextAccessor;
         }
 
         public IActionResult Index()
         {
+            string logged = context.HttpContext.Session.GetString("username");
+
+            if (logged != null)
+            {
+                return View("HomeWelcome");
+            }
             return View();
         }
 

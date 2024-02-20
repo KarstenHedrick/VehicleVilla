@@ -2,9 +2,48 @@
     ViewData["Title"] = "Home Page";
 }
 
+<style>
+    .banner-container {
+        width: 100%;
+        height: 200px; 
+        overflow: hidden; 
+        position: relative; 
+    }
+
+    .banner-overlay {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 20%; 
+        background: linear-gradient(to right, white, rgba(255, 255, 255, 0));
+    }
+
+    .banner-overlay.right {
+        right: 0;
+        left: auto;
+        background: linear-gradient(to left, white, rgba(255, 255, 255, 0));
+    }
+
+    #banner {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; 
+        display: block; 
+    }
+</style>
+
+<div class="banner-container">
+    <div class="banner-overlay"></div>
+    <div class="banner-overlay right"></div>
+    <img id="banner" src="~/lib/image/HomeBanner.jpg" alt="Banner Image" />
+</div>
+
+<br />
+<br />
+
 <div class="text-center">
     <h1 class="display-4">Welcome to Vehicle Villa!</h1>
-    <p>Vehcile Villa is the home of numerous luxurious vehciles around the world! <br /> Login or Register to get started browsing our platform!</p>
+    <p>Vehicle Villa is home of numerous luxurious vehicles around the world! <br /> Login or Register to get started browsing our platform!</p>
      
     <a href="/Login" class="btn btn-primary">Login</a>
     <a href="/Register" class="btn btn-secondary">Register</a>

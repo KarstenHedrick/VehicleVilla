@@ -69,6 +69,35 @@ namespace VehicleVilla.Services
             return user;
         }
 
+        public int UpdateAccount(UserModel user)
+        {
+            int newIdNumber = -1;
+
+            try
+            {
+
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+                    MySqlCommand cmd = new MySqlCommand("UPDATE users SET Username = @Username, Password = @Password, Email = @Email, Firstname = @Firstname, Lastname = @Lastname WHERE Id = @Id", connection);
+                    cmd.Parameters.AddWithValue("@Username", user.Username);
+                    cmd.Parameters.AddWithValue("@Password", user.Password);
+                    cmd.Parameters.AddWithValue("@Email", user.Email);
+                    cmd.Parameters.AddWithValue("@Firstname", user.Firstname);
+                    cmd.Parameters.AddWithValue("@Lastname", user.Lastname);
+                    cmd.Parameters.AddWithValue("@Id", user.Id);
+
+                    newIdNumber = Convert.ToInt32(cmd.ExecuteScalar());
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.Message);
+            }
+
+            return newIdNumber;
+        }
+
         public bool VerifyAccount(string username, string password)
         {
             UserModel foundUser = new UserModel();

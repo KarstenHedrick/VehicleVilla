@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\lib\image\HomeBanner.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.QuickGrid.EntityFrameworkAdapter" Version="8.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.2">
       <PrivateAssets>all</PrivateAssets>
@@ -17,6 +21,10 @@
     <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.22" />
     <PackageReference Include="MySqlConnector" Version="2.3.5" />
     <PackageReference Include="MySqlConnector.DependencyInjection" Version="2.3.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\lib\image\HomeBanner.jpg" />
   </ItemGroup>
 
 </Project>

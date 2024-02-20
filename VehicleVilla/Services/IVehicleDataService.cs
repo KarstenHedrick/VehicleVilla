@@ -11,5 +11,6 @@ namespace VehicleVilla.Services
         int AddVehicle(VehicleModel vehicle);
         int DeleteVehicle(VehicleModel vehicle);
         int UpdateVehicle(VehicleModel vehicle);
+        List<VehicleModel> GetVehiclesByUser(UserModel user);
     }
 }

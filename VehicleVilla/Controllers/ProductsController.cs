@@ -7,6 +7,15 @@ namespace VehicleVilla.Controllers
     public class ProductsController : Controller
     {
         VehicleDAO repo = new VehicleDAO();
+        UserDAO userRepo = new UserDAO();
+
+        private readonly IHttpContextAccessor context;
+
+        public ProductsController(IHttpContextAccessor httpContextAccessor)
+        {
+            context = httpContextAccessor;
+        }
+
         public IActionResult Index()
         {
             return View(repo.AllVehicles());
@@ -49,6 +58,9 @@ namespace VehicleVilla.Controllers
 
         public IActionResult ProcessCreate(VehicleModel vehicle)
         {
+            UserModel user = userRepo.GetUserByUsername(context.HttpContext.Session.GetString("username"));
+            vehicle.User = user.Id;
+
             repo.AddVehicle(vehicle);
             return View("Index", repo.AllVehicles());
         }
@@ -60,7 +72,23 @@ namespace VehicleVilla.Controllers
 
         public IActionResult MyListings()
         {
-            return View();
+            string logged = context.HttpContext.Session.GetString("username");
+
+            if (logged != null)
+            {
+                List<VehicleModel> myVehicles = new List<VehicleModel>();
+                UserModel user = userRepo.GetUserByUsername(logged);
+
+
+                myVehicles = repo.GetVehiclesByUser(user);
+
+                return View("MyListings", myVehicles);
+            }
+            else
+            {
+                return View("LoginRequest");
+            }
+            
         }
     }
 }

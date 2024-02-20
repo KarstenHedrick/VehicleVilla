@@ -17,8 +17,7 @@ namespace VehicleVilla.Services
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
-                    MySqlCommand cmd = new MySqlCommand("INSERT INTO vehicles (Id, User, Make, Model, Year, Color, Price) VALUES (@Id,@User,@Make,@Model,@Year,@Color,@Price)", connection);
-                    cmd.Parameters.AddWithValue("@Id", vehicle.Id);
+                    MySqlCommand cmd = new MySqlCommand("INSERT INTO vehicles (User, Make, Model, Year, Color, Price) VALUES (@User,@Make,@Model,@Year,@Color,@Price)", connection);
                     cmd.Parameters.AddWithValue("@User", vehicle.User);
                     cmd.Parameters.AddWithValue("@Make", vehicle.Make);
                     cmd.Parameters.AddWithValue("@Model", vehicle.Model);
@@ -191,6 +190,41 @@ namespace VehicleVilla.Services
             }
 
             return newIdNumber;
+        }
+
+        public List<VehicleModel> GetVehiclesByUser(UserModel user)
+        {
+            List<VehicleModel> foundVehicles = new List<VehicleModel>();
+
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+                    MySqlCommand cmd = new MySqlCommand("SELECT * FROM vehicles WHERE User = @User", connection);
+                    cmd.Parameters.AddWithValue("@User", user.Id);
+                    MySqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        VehicleModel vehicle = new VehicleModel();
+                        vehicle.Id = Convert.ToInt32(reader["Id"]);
+                        vehicle.User = Convert.ToInt32(reader["User"]);
+                        vehicle.Make = reader["Make"].ToString();
+                        vehicle.Model = reader["Model"].ToString();
+                        vehicle.Year = Convert.ToInt32(reader["Year"]);
+                        vehicle.Color = reader["Color"].ToString();
+                        vehicle.Price = (float)Convert.ToDouble(reader["Price"]);
+                        foundVehicles.Add(vehicle);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.Message);
+            }
+
+            return foundVehicles;
         }
     }
 }

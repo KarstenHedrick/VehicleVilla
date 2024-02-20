@@ -1,0 +1,47 @@
+﻿@inject IHttpContextAccessor context;
+
+<style>
+    .banner-container {
+        width: 100%;
+        height: 200px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .banner-overlay {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 20%;
+        background: linear-gradient(to right, white, rgba(255, 255, 255, 0));
+    }
+
+        .banner-overlay.right {
+            right: 0;
+            left: auto;
+            background: linear-gradient(to left, white, rgba(255, 255, 255, 0));
+        }
+
+    #banner {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+</style>
+
+<div class="banner-container">
+    <div class="banner-overlay"></div>
+    <div class="banner-overlay right"></div>
+    <img id="banner" src="~/lib/image/HomeBanner.jpg" alt="Banner Image" />
+</div>
+
+<br />
+<br />
+
+<div class="text-center">
+    <h1>Welcome Back @context.HttpContext.Session.GetString("username")!</h1>
+    <p>View the new and amazing vehicles on the market! </p>
+
+    <a href="~/Login/Logout" class="btn btn-primary">Logout</a>
+</div>
