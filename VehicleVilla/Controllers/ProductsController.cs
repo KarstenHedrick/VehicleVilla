@@ -42,12 +42,19 @@ namespace VehicleVilla.Controllers
 
         public IActionResult EditVehicle(int id)
         {
+            context.HttpContext.Session.SetInt32("editId", (int)id);
             return View(repo.GetVehicleById(id));
         }
 
         public IActionResult ProcessEdit(VehicleModel vehicle)
         {
-            repo.UpdateVehicle(vehicle);
+            int? id = context.HttpContext.Session.GetInt32("editId");
+            if (id != null)
+            {
+                vehicle.Id = id;
+                repo.UpdateVehicle(vehicle);
+                return View("Index", repo.AllVehicles());
+            }
             return View("Index", repo.AllVehicles());
         }
 

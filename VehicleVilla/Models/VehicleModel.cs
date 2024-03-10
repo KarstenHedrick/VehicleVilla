@@ -1,4 +1,6 @@
-﻿namespace VehicleVilla.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace VehicleVilla.Models
 {
     public class VehicleModel
     {
@@ -8,6 +10,7 @@
         public string Model { get; set; }
         public int Year { get; set; }
         public string Color { get; set; }
+        [DataType(DataType.Currency)]
         public float Price { get; set; }
 
         public VehicleModel(int id, int user, string make, string model, int year, string color, float price)

@@ -17,8 +17,7 @@ namespace VehicleVilla.Services
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
-                    MySqlCommand cmd = new MySqlCommand("INSERT INTO users (Id, Username, Password, Email, Firstname, Lastname) VALUES (@Id,@Username,@Password,@Email,@Firstname,@Lastname)", connection);
-                    cmd.Parameters.AddWithValue("@Id", user.Id);
+                    MySqlCommand cmd = new MySqlCommand("INSERT INTO users (Username, Password, Email, Firstname, Lastname) VALUES (@Username,@Password,@Email,@Firstname,@Lastname)", connection);
                     cmd.Parameters.AddWithValue("@Username", user.Username);
                     cmd.Parameters.AddWithValue("@Password", user.Password);
                     cmd.Parameters.AddWithValue("@Email", user.Email);
