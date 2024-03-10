@@ -5,7 +5,7 @@ namespace VehicleVilla.Services
 {
     public class UserDAO : IUserDataService
     {
-        string connectionString = "Server=localhost;User ID=root;Password=root;port=3306;Database=vehiclevilla";
+        string connectionString = "Server=vehiclevilla.mysql.database.azure.com;User ID=karsten;Password=Sn@wmobile119629;port=3306;Database=vehiclevilla";
 
         public int CreateAccount(UserModel user)
         {

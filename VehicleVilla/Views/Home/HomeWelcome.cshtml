@@ -1,5 +1,6 @@
 ﻿@inject IHttpContextAccessor context;
 
+
 <style>
     .banner-container {
         width: 100%;
@@ -16,11 +17,11 @@
         background: linear-gradient(to right, white, rgba(255, 255, 255, 0));
     }
 
-        .banner-overlay.right {
-            right: 0;
-            left: auto;
-            background: linear-gradient(to left, white, rgba(255, 255, 255, 0));
-        }
+    .banner-overlay.right {
+        right: 0;
+        left: auto;
+        background: linear-gradient(to left, white, rgba(255, 255, 255, 0));
+    }
 
     #banner {
         width: 100%;
@@ -33,7 +34,7 @@
 <div class="banner-container">
     <div class="banner-overlay"></div>
     <div class="banner-overlay right"></div>
-    <img id="banner" src="~/lib/image/HomeBanner.jpg" alt="Banner Image" />
+    <img id="banner" src="https://vehiclevstorageaccount.blob.core.windows.net/images/HomeBanner.jpg" alt="Banner Image" />
 </div>
 
 <br />
