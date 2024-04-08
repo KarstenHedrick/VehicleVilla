@@ -1,4 +1,5 @@
-﻿using MySqlConnector;
+﻿using log4net;
+using MySqlConnector;
 using VehicleVilla.Models;
 
 namespace VehicleVilla.Services
@@ -6,6 +7,7 @@ namespace VehicleVilla.Services
     public class VehicleDAO : IVehicleDataService
     {
         string connectionString = "Server=vehiclevilla.mysql.database.azure.com;User ID=karsten;Password=Sn@wmobile119629;port=3306;Database=vehiclevilla";
+        private static readonly ILog _log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public int AddVehicle(VehicleModel vehicle)
         {
@@ -30,8 +32,11 @@ namespace VehicleVilla.Services
             }
             catch (Exception ex)
             {
+                _log.Error("AddVehicle Method Failed. Exception: ", ex); // Logger ERROR
                 Console.Write(ex.Message);
             }
+
+            _log.Info("AddVehicle Accessed. Vehicle was Created within the Database."); // Logger INFO
 
             return newIdNumber;
         }
@@ -64,8 +69,11 @@ namespace VehicleVilla.Services
             }
             catch (Exception ex)
             {
+                _log.Error("AllVehicles Method Failed. Exception: ", ex); // Logger ERROR
                 Console.Write(ex.Message);
             }
+
+            _log.Info("AllVehicles Accessed. Vehicles were Gathered from the Database."); // Logger INFO
 
             return foundVehicles;
         }
@@ -86,8 +94,11 @@ namespace VehicleVilla.Services
             }
             catch (Exception ex)
             {
+                _log.Error("DeleteVehicle Method Failed. Exception: ", ex); // Logger ERROR
                 Console.Write(ex.Message);
             }
+
+            _log.Info("DeleteVehicle Accessed. Vehicle was Deleted from the Database."); // Logger INFO
 
             return deleteId;
         }
@@ -119,8 +130,11 @@ namespace VehicleVilla.Services
             }
             catch (Exception ex)
             {
+                _log.Error("GetVehicleById Method Failed. Exception: ", ex); // Logger ERROR
                 Console.Write(ex.Message);
             }
+
+            _log.Info("GetVehicleById Accessed. Vehicle was Gathered from the Database."); // Logger INFO
 
             return foundVehicle;
         }
@@ -156,8 +170,11 @@ namespace VehicleVilla.Services
             }
             catch (Exception ex)
             {
+                _log.Error("SearchVehicles Method Failed. Exception: ", ex); // Logger ERROR
                 Console.Write(ex.Message);
             }
+
+            _log.Info("SearchVehicles Accessed. Searched Vehicles were Gathered from the Database."); // Logger INFO
 
             return foundVehicles;
         }
@@ -185,8 +202,11 @@ namespace VehicleVilla.Services
             }
             catch (Exception ex)
             {
+                _log.Error("UpdateVehicle Method Failed. Exception: ", ex); // Logger ERROR
                 Console.Write(ex.Message);
             }
+
+            _log.Info("UpdateVehicle Accessed. Vehicle was Updated within the Database."); // Logger INFO
 
             return newIdNumber;
         }
@@ -220,8 +240,11 @@ namespace VehicleVilla.Services
             }
             catch (Exception ex)
             {
+                _log.Error("GetVehiclesByUser Method Failed. Exception: ", ex); // Logger ERROR
                 Console.Write(ex.Message);
             }
+
+            _log.Info("GetVehiclesByUser Accessed. Vehicles were Gathered from the Database."); // Logger INFO
 
             return foundVehicles;
         }

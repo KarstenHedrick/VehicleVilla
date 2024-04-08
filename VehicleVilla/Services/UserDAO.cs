@@ -1,4 +1,5 @@
-﻿using MySqlConnector;
+﻿using log4net;
+using MySqlConnector;
 using VehicleVilla.Models;
 
 namespace VehicleVilla.Services
@@ -6,6 +7,7 @@ namespace VehicleVilla.Services
     public class UserDAO : IUserDataService
     {
         string connectionString = "Server=vehiclevilla.mysql.database.azure.com;User ID=karsten;Password=Sn@wmobile119629;port=3306;Database=vehiclevilla";
+        private static readonly ILog _log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public int CreateAccount(UserModel user)
         {
@@ -30,8 +32,11 @@ namespace VehicleVilla.Services
             }
             catch (Exception ex)
             {
+                _log.Error("CreateAccount Method Failed. Exception: ", ex); // Logger ERROR
                 Console.Write(ex.Message);
             }
+
+            _log.Info("CreateAccount Accessed. User was Created within the Database."); // Logger INFO
 
             return newIdNumber;
         }
@@ -62,8 +67,11 @@ namespace VehicleVilla.Services
             }
             catch (Exception ex)
             {
+                _log.Error("GetUserByUsername Method Failed. Exception: ", ex); // Logger ERROR
                 Console.Write(ex.Message);
             }
+
+            _log.Info("GetUserByUsername Accessed. User was Gathered from the Database."); // Logger INFO
 
             return user;
         }
@@ -91,8 +99,11 @@ namespace VehicleVilla.Services
             }
             catch (Exception ex)
             {
+                _log.Error("UpdateAccount Method Failed. Exception: ", ex); // Logger ERROR
                 Console.Write(ex.Message);
             }
+
+            _log.Info("UpdateAccount Accessed. User was Updated within the Database."); // Logger INFO
 
             return newIdNumber;
         }
@@ -123,15 +134,18 @@ namespace VehicleVilla.Services
             }
             catch (Exception ex)
             {
+                _log.Error("VerifyAccount Method Failed. Exception: ", ex); // Logger ERROR
                 Console.Write(ex.Message);
             }
 
             if (username == foundUser.Username && password == foundUser.Password)
             {
+                _log.Info("VerifyAccount Accessed. User was Found within the Database."); // Logger INFO
                 return true;
             }
             else
             {
+                _log.Warn("VerifyAccount Accessed. User was NOT Found within the Database."); // Logger WARN
                 return false;
             }
         }
