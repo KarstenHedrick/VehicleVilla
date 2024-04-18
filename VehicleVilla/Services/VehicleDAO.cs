@@ -18,14 +18,15 @@ namespace VehicleVilla.Services
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
-                    MySqlCommand cmd = new MySqlCommand("INSERT INTO vehicles (User, Make, Model, Year, Color, Price) VALUES (@User,@Make,@Model,@Year,@Color,@Price)", connection);
+                    MySqlCommand cmd = new MySqlCommand("INSERT INTO vehicles (User, Make, Model, Year, Color, Price, Image) VALUES (@User,@Make,@Model,@Year,@Color,@Price, @Image)", connection);
                     cmd.Parameters.AddWithValue("@User", vehicle.User);
                     cmd.Parameters.AddWithValue("@Make", vehicle.Make);
                     cmd.Parameters.AddWithValue("@Model", vehicle.Model);
                     cmd.Parameters.AddWithValue("@Year", vehicle.Year);
                     cmd.Parameters.AddWithValue("@Color", vehicle.Color);
                     cmd.Parameters.AddWithValue("@Price", vehicle.Price);
-                    
+                    cmd.Parameters.AddWithValue("@Image", vehicle.Image);
+
 
                     newIdNumber = Convert.ToInt32(cmd.ExecuteScalar());
                 }
@@ -63,6 +64,7 @@ namespace VehicleVilla.Services
                         vehicle.Year = Convert.ToInt32(reader["Year"]);
                         vehicle.Color = reader["Color"].ToString();
                         vehicle.Price = (float) Convert.ToDouble(reader["Price"]);
+                        vehicle.Image = reader["Image"].ToString();
                         foundVehicles.Add(vehicle);
                     }
                 }
@@ -125,6 +127,7 @@ namespace VehicleVilla.Services
                         foundVehicle.Year = Convert.ToInt32(reader["Year"]);
                         foundVehicle.Color = reader["Color"].ToString();
                         foundVehicle.Price = (float)Convert.ToDouble(reader["Price"]);
+                        foundVehicle.Image = reader["Image"].ToString();
                     }
                 }
             }
@@ -149,8 +152,9 @@ namespace VehicleVilla.Services
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
-                    MySqlCommand cmd = new MySqlCommand("SELECT * FROM vehicles WHERE Model LIKE @Model", connection);
+                    MySqlCommand cmd = new MySqlCommand("SELECT * FROM vehicles WHERE Model LIKE @Model OR Make LIKE @Make", connection);
                     cmd.Parameters.AddWithValue("@Model", '%' + term + '%');
+                    cmd.Parameters.AddWithValue("@Make", '%' + term + '%');
 
                     MySqlDataReader reader = cmd.ExecuteReader();
 
@@ -164,6 +168,7 @@ namespace VehicleVilla.Services
                         vehicle.Year = Convert.ToInt32(reader["Year"]);
                         vehicle.Color = reader["Color"].ToString();
                         vehicle.Price = (float)Convert.ToDouble(reader["Price"]);
+                        vehicle.Image = reader["Image"].ToString();
                         foundVehicles.Add(vehicle);
                     }
                 }
@@ -189,13 +194,14 @@ namespace VehicleVilla.Services
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
-                    MySqlCommand cmd = new MySqlCommand("UPDATE vehicles SET Make = @Make, Model = @Model, Year = @Year, Color = @Color, Price = @Price WHERE Id = @Id", connection);
+                    MySqlCommand cmd = new MySqlCommand("UPDATE vehicles SET Make = @Make, Model = @Model, Year = @Year, Color = @Color, Price = @Price, Image = @Image WHERE Id = @Id", connection);
                     cmd.Parameters.AddWithValue("@Make", vehicle.Make);
                     cmd.Parameters.AddWithValue("@Model", vehicle.Model);
                     cmd.Parameters.AddWithValue("@Year", vehicle.Year);
                     cmd.Parameters.AddWithValue("@Color", vehicle.Color);
                     cmd.Parameters.AddWithValue("@Price", vehicle.Price);
                     cmd.Parameters.AddWithValue("@Id", vehicle.Id);
+                    cmd.Parameters.AddWithValue("@Image", vehicle.Image);
 
                     newIdNumber = Convert.ToInt32(cmd.ExecuteScalar());
                 }
@@ -234,6 +240,7 @@ namespace VehicleVilla.Services
                         vehicle.Year = Convert.ToInt32(reader["Year"]);
                         vehicle.Color = reader["Color"].ToString();
                         vehicle.Price = (float)Convert.ToDouble(reader["Price"]);
+                        vehicle.Image = reader["Image"].ToString();
                         foundVehicles.Add(vehicle);
                     }
                 }

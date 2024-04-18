@@ -4,10 +4,34 @@
     ViewData["Title"] = "_vehicleCard";
 }
 
-<div id="card-number-@Model.Id"class="card" style="width: 18rem;">
+<style>
+    .card {
+        border-radius: 0;
+    }
+
+    .card-img-top {
+        width: 100%; 
+        height: auto; 
+    }
+
+    .custom-button{
+        border-radius: 0;
+        width: 100%
+    }
+
+    .make-text {
+        color: black;
+        font-weight: bold;
+        text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    }
+</style>
+
+<div id="card-number-@Model.Id" class="card" style="width: 20rem;">
     <div class="card-body">
-        <h5 class="card-title">@Model.Make @Model.Model</h5>
-        <p class="card-text"> @Html.DisplayFor(modelItem => Model.Price)</p>
-        <a href="/products/ShowVehicleDetails/@Model.Id" class="btn btn-primary">Show Details</a>
+        <img src="@Model.Image" class="card-img-top" alt="Vehicle Image">
+        <hr />
+        <h5 class="card-title"><span class="make-text">@Model.Make</span> @Model.Model</h5>
+        <p class="card-text">@Html.DisplayFor(modelItem => Model.Price)</p>
+        <a href="/products/ShowVehicleDetails/@Model.Id" class="btn btn-primary custom-button">Show Details</a>
     </div>
 </div>

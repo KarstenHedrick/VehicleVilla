@@ -3,6 +3,8 @@ using log4net;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using MySqlConnector;
 using VehicleVilla.Services;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,7 +21,7 @@ builder.Services.AddSession(options =>
 });
 
 // Configure Log4net
-var log4netConfig = new FileInfo(Path.Combine(builder.Environment.ContentRootPath, "Config/log4net.xml"));
+var log4netConfig = new FileInfo(Path.Combine(builder.Environment.ContentRootPath, "Config/log4net.config"));
 XmlConfigurator.ConfigureAndWatch(log4netConfig);
 
 var app = builder.Build();

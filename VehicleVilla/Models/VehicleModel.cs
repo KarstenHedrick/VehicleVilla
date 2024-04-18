@@ -12,8 +12,9 @@ namespace VehicleVilla.Models
         public string Color { get; set; }
         [DataType(DataType.Currency)]
         public float Price { get; set; }
+        public string Image { get; set; }
 
-        public VehicleModel(int id, int user, string make, string model, int year, string color, float price)
+        public VehicleModel(int id, int user, string make, string model, int year, string color, float price, string image)
         {
             Id = id;
             User = user;
@@ -22,6 +23,7 @@ namespace VehicleVilla.Models
             Year = year;
             Color = color;
             Price = price;
+            Image = image;
         }
 
         public VehicleModel() { }
