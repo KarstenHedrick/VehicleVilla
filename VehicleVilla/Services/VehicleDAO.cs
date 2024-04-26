@@ -6,9 +6,16 @@ namespace VehicleVilla.Services
 {
     public class VehicleDAO : IVehicleDataService
     {
+        // Database Conenction String
         string connectionString = "Server=vehiclevilla.mysql.database.azure.com;User ID=karsten;Password=Sn@wmobile119629;port=3306;Database=vehiclevilla";
+        // Gather Logger Interface
         private static readonly ILog _log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
+        /// <summary>
+        /// Creates a new vehicle within the database
+        /// </summary>
+        /// <param name="vehicle"></param>
+        /// <returns>Integer</returns>
         public int AddVehicle(VehicleModel vehicle)
         {
             int newIdNumber = -1;
@@ -42,6 +49,10 @@ namespace VehicleVilla.Services
             return newIdNumber;
         }
 
+        /// <summary>
+        /// Retreives All Vehicles within a Database
+        /// </summary>
+        /// <returns>List<VehicleModel></returns>
         public List<VehicleModel> AllVehicles()
         {
             List<VehicleModel> foundVehicles = new List<VehicleModel>();
@@ -80,6 +91,11 @@ namespace VehicleVilla.Services
             return foundVehicles;
         }
 
+        /// <summary>
+        /// Removes a Vehicle from the database
+        /// </summary>
+        /// <param name="vehicle"></param>
+        /// <returns>Integer</returns>
         public int DeleteVehicle(VehicleModel vehicle)
         {
             int deleteId = -1;
@@ -105,6 +121,11 @@ namespace VehicleVilla.Services
             return deleteId;
         }
 
+        /// <summary>
+        /// Retreives Vehicle from database based on the ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>VehicleModel</returns>
         public VehicleModel GetVehicleById(int id)
         {
             VehicleModel foundVehicle = new VehicleModel();
@@ -142,6 +163,11 @@ namespace VehicleVilla.Services
             return foundVehicle;
         }
 
+        /// <summary>
+        /// Retreives a List of vehciles based on a search term
+        /// </summary>
+        /// <param name="term"></param>
+        /// <returns>List<VehicleModel></returns>
         public List<VehicleModel> SearchVehicles(string term)
         {
             List<VehicleModel> foundVehicles = new List<VehicleModel>();
@@ -184,6 +210,11 @@ namespace VehicleVilla.Services
             return foundVehicles;
         }
 
+        /// <summary>
+        /// Updates a Vehicle within the database
+        /// </summary>
+        /// <param name="vehicle"></param>
+        /// <returns>Integer</returns>
         public int UpdateVehicle(VehicleModel vehicle)
         {
             int newIdNumber = -1;
@@ -217,6 +248,11 @@ namespace VehicleVilla.Services
             return newIdNumber;
         }
 
+        /// <summary>
+        /// Retreives Vehicles by User ID
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns>List<VehicleModel></returns>
         public List<VehicleModel> GetVehiclesByUser(UserModel user)
         {
             List<VehicleModel> foundVehicles = new List<VehicleModel>();

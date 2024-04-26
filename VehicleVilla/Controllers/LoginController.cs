@@ -10,8 +10,10 @@ namespace VehicleVilla.Controllers
 {
     public class LoginController : Controller
     {
+        // Gather UserDAO
         UserDAO repo = new UserDAO();
 
+        // Gather Logger and HttpContextAccessor
         private readonly IHttpContextAccessor context;
         private static readonly ILog _log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -20,6 +22,10 @@ namespace VehicleVilla.Controllers
             context = httpContextAccessor;
         }
 
+        /// <summary>
+        /// Main Login Page
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Index()
         {
             _log.Info("User Accessed Login Page."); // Logger INFO
@@ -27,6 +33,12 @@ namespace VehicleVilla.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Logs user into account, and validates user is within the database
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         public IActionResult ProcessLogin(string username, string password)
         {
             bool verfied = repo.VerifyAccount(username, password);
@@ -50,6 +62,10 @@ namespace VehicleVilla.Controllers
             }
         }
 
+        /// <summary>
+        /// Shows account details, and account edit page
+        /// </summary>
+        /// <returns></returns>
         public IActionResult DisplayAccount()
         {
             string logged = context.HttpContext.Session.GetString("username");
@@ -67,6 +83,11 @@ namespace VehicleVilla.Controllers
             return View("../Products/LoginRequest");
         }
 
+        /// <summary>
+        /// Edits and updates accoun within the database
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         public IActionResult ProcessEdit(UserModel user)
         {
             // Gather User from User ID
@@ -78,6 +99,10 @@ namespace VehicleVilla.Controllers
             return View("DisplayAccount", user);
         }
 
+        /// <summary>
+        /// Logs user out of the webpage, and clears context
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Logout()
         {
             context.HttpContext.Session.Remove("username");

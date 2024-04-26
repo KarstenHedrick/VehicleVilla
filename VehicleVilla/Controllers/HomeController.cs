@@ -11,6 +11,7 @@ namespace VehicleVilla.Controllers
 {
     public class HomeController : Controller
     {
+        // Gather Logger and HttpContextAccessor
         private readonly IHttpContextAccessor context;
         private static readonly ILog _log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -19,6 +20,10 @@ namespace VehicleVilla.Controllers
             context = httpContextAccessor;
         }
 
+        /// <summary>
+        /// Home Page of Application
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Index()
         {
             // Get Logged User
@@ -34,6 +39,10 @@ namespace VehicleVilla.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Project Privacy Page
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Privacy()
         {
             return View();

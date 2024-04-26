@@ -6,9 +6,17 @@ namespace VehicleVilla.Services
 {
     public class UserDAO : IUserDataService
     {
+        // Database Connection String
         string connectionString = "Server=vehiclevilla.mysql.database.azure.com;User ID=karsten;Password=Sn@wmobile119629;port=3306;Database=vehiclevilla";
+
+        // Gather Logger Interface
         private static readonly ILog _log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
+        /// <summary>
+        /// Responsible for Creating New Account in Database
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns>Integer</returns>
         public int CreateAccount(UserModel user)
         {
             int newIdNumber = -1;
@@ -41,6 +49,11 @@ namespace VehicleVilla.Services
             return newIdNumber;
         }
 
+        /// <summary>
+        /// Retreives a User from the Database based on username
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns>UserModel</returns>
         public UserModel GetUserByUsername(string username)
         {
             UserModel user = new UserModel();
@@ -76,6 +89,11 @@ namespace VehicleVilla.Services
             return user;
         }
 
+        /// <summary>
+        /// Updates an account's information in the database
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns>Integer</returns>
         public int UpdateAccount(UserModel user)
         {
             int newIdNumber = -1;
@@ -108,6 +126,12 @@ namespace VehicleVilla.Services
             return newIdNumber;
         }
 
+        /// <summary>
+        /// Confirms an account is within the database, with matching username and password
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns>Boolean</returns>
         public bool VerifyAccount(string username, string password)
         {
             UserModel foundUser = new UserModel();
